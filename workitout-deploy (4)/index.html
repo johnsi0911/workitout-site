@@ -449,7 +449,12 @@
     font-size:21px; margin-bottom:18px;
   }
   .worksheet-card h3{ font-size:17px; font-weight:800; margin-bottom:8px; letter-spacing:-.2px;}
-  .worksheet-card p{ font-size:13.5px; color:var(--muted); line-height:1.55; margin-bottom:20px; flex:1;}
+  .worksheet-card p{ font-size:13.5px; color:var(--muted); line-height:1.55; margin-bottom:14px;}
+  .wc-scenarios{ list-style:none; margin:0 0 18px; padding:0; flex:1;}
+  .wc-scenarios li{
+    font-size:12.5px; color:var(--ink); line-height:1.5; margin-bottom:8px; padding-left:16px; position:relative;
+  }
+  .wc-scenarios li::before{ content:'•'; position:absolute; left:0; color:var(--muted);}
   .worksheet-card .btn{ width:100%; justify-content:center;}
   .worksheet-card .wc-pages{font-size:11px; color:var(--muted); font-weight:600; margin-top:10px; text-align:center;}
 
@@ -657,12 +662,8 @@
     <nav>
       <a href="#" class="brand"><span class="logo-dot"><svg viewBox="0 0 315 315" aria-hidden="true"><use href="#witIconMark"/></svg></span><span class="brand-text">WORK<span class="it">IT</span>OUT</span></a>
       <div class="nav-links">
-        <a href="/daily.html">🌱 Daily</a>
-        <a href="/blog/">Blog</a>
         <a href="#worksheets">Worksheets</a>
-        <a href="#how">How it works</a>
-        <a href="#about">About</a>
-        <a href="#faq">FAQ</a>
+        <a href="/blog/">Blog</a>
       </div>
       <div class="nav-cta">
         <a href="https://calendly.com/johnsijayasingh/30min" class="btn btn-outline" target="_blank" rel="noopener">Career Coaching</a>
@@ -675,12 +676,8 @@
     <div class="mobile-menu" id="mobile-menu">
       <a href="#worksheets" class="btn btn-primary mobile-cta">Get the Worksheets</a>
       <a href="https://calendly.com/johnsijayasingh/30min" class="btn btn-outline mobile-cta" target="_blank" rel="noopener" style="margin-bottom:16px;">Career Coaching</a>
-      <a href="/daily.html">🌱 Daily</a>
-      <a href="/blog/">Blog</a>
       <a href="#worksheets">Worksheets</a>
-      <a href="#how">How it works</a>
-      <a href="#about">About</a>
-      <a href="#faq">FAQ</a>
+      <a href="/blog/">Blog</a>
     </div>
   </div>
 </header>
@@ -795,6 +792,11 @@
         <div class="wc-icon" style="background:var(--lav-card); color:var(--indigo);">💭</div>
         <h3>This Is Bothering Me</h3>
         <p>For the thing you can't stop thinking about. Get it out of your head, separate the facts from the story, and find your next small step.</p>
+        <ul class="wc-scenarios">
+          <li>When something your manager says stays with you long after the conversation ends.</li>
+          <li>When someone takes credit for your work.</li>
+          <li>When you find yourself wondering, "Am I overreacting?"</li>
+        </ul>
         <a href="/worksheets/this-is-bothering-me.pdf" class="btn btn-primary" target="_blank" rel="noopener">Download free PDF</a>
         <p class="wc-pages">2 pages · PDF</p>
       </div>
@@ -802,6 +804,11 @@
         <div class="wc-icon" style="background:var(--peach); color:var(--coral);">🧭</div>
         <h3>I Need to Make a Decision</h3>
         <p>Weigh a tough call with a clear head: stay or leave, speak up or wait, yes or no, using guided questions instead of going in circles.</p>
+        <ul class="wc-scenarios">
+          <li>When you want to change careers but don't know where to begin.</li>
+          <li>When you're angry enough to start typing that resignation letter.</li>
+          <li>When you're about to make a big decision, but you know your emotions are running high.</li>
+        </ul>
         <a href="/worksheets/i-need-to-make-a-decision.pdf" class="btn btn-primary" target="_blank" rel="noopener">Download free PDF</a>
         <p class="wc-pages">2 pages · PDF</p>
       </div>
@@ -809,6 +816,11 @@
         <div class="wc-icon" style="background:#E7DEF9; color:#7A3FE4;">💬</div>
         <h3>A Difficult Conversation Is Coming Up</h3>
         <p>Prepare for the talk you're dreading, with your manager, a colleague, anyone, so you walk in clear instead of anxious.</p>
+        <ul class="wc-scenarios">
+          <li>When you have a difficult conversation tomorrow and don't know how to approach it.</li>
+          <li>When you feel like your team lead is playing favourites.</li>
+          <li>When you suspect a senior colleague is threatened by your skills or abilities.</li>
+        </ul>
         <a href="/worksheets/a-difficult-conversation-is-coming-up.pdf" class="btn btn-primary" target="_blank" rel="noopener">Download free PDF</a>
         <p class="wc-pages">2 pages · PDF</p>
       </div>
@@ -816,6 +828,11 @@
         <div class="wc-icon" style="background:#E1F5EC; color:#1E9E6E;">🌊</div>
         <h3>I'm Feeling Overwhelmed</h3>
         <p>Sort urgent from can-wait, find what's actually in your control, and get to one small thing you can do in the next 10 minutes.</p>
+        <ul class="wc-scenarios">
+          <li>When a deadline keeps running through your mind, even during lunch, dinner, or at bedtime.</li>
+          <li>When you feel guilty taking sick leave, so you show up anyway.</li>
+          <li>When weekends and holidays don't feel like a break because your mind is still at work.</li>
+        </ul>
         <a href="/worksheets/im-feeling-overwhelmed.pdf" class="btn btn-primary" target="_blank" rel="noopener">Download free PDF</a>
         <p class="wc-pages">2 pages · PDF</p>
       </div>
@@ -823,6 +840,11 @@
         <div class="wc-icon" style="background:#FDEDE4; color:#C97A17;">🌱</div>
         <h3>I'm Losing Confidence</h3>
         <p>Check the story you're telling yourself against the evidence, and find your way back to remembering what you're capable of.</p>
+        <ul class="wc-scenarios">
+          <li>When your client rejects your design for the seventh time, and you're one email away from quitting.</li>
+          <li>When you no longer feel like you belong in your team or organisation.</li>
+          <li>When you can't stop comparing your education, background, or abilities with your colleagues.</li>
+        </ul>
         <a href="/worksheets/im-losing-confidence.pdf" class="btn btn-primary" target="_blank" rel="noopener">Download free PDF</a>
         <p class="wc-pages">2 pages · PDF</p>
       </div>
@@ -830,6 +852,11 @@
         <div class="wc-icon" style="background:#E4EDFD; color:#2E6FE0;">⏳</div>
         <h3>I Keep Putting It Off</h3>
         <p>Understand what's really making it hard to start, test the prediction against reality, and shrink the first step down to five minutes.</p>
+        <ul class="wc-scenarios">
+          <li>When you've lost the motivation to do work you once enjoyed.</li>
+          <li>When a task sits at the top of your list for days, untouched.</li>
+          <li>When you'd rather do anything else than start the one thing you're avoiding.</li>
+        </ul>
         <a href="/worksheets/i-keep-putting-it-off.pdf" class="btn btn-primary" target="_blank" rel="noopener">Download free PDF</a>
         <p class="wc-pages">2 pages · PDF</p>
       </div>
@@ -938,7 +965,6 @@
     <div class="footer-row">
       <a href="#" class="brand"><span class="logo-dot"><svg viewBox="0 0 315 315" aria-hidden="true"><use href="#witIconMark"/></svg></span><span class="brand-text">WORK<span class="it">IT</span>OUT</span></a>
       <div class="footer-links">
-        <a href="/daily.html">Daily Check-in</a>
         <a href="/blog/">Blog</a>
         <a href="#worksheets">Worksheets</a>
         <a href="#how">How it works</a>
