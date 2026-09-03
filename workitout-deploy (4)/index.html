@@ -549,6 +549,7 @@
   .final-cta-left h2{ font-size:22px; font-weight:800; margin-bottom:4px;}
   .final-cta-left p{ font-size:14.5px; opacity:.85;}
   .final-signup{ display:flex; flex-wrap:wrap; gap:10px;}
+  .newsletter-msg{ font-size:13.5px; margin-top:10px; color:#fff; font-weight:600;}
   .final-signup input{ padding:14px 20px; border-radius:999px; border:none; font-size:14.5px; font-family:inherit; width:230px; min-width:160px; outline:none;}
   .footer-secondary-row{ display:flex; flex-wrap:wrap; justify-content:center; gap:14px; margin-top:22px;}
 
@@ -953,15 +954,15 @@
   <div class="wrap">
     <div class="final-cta">
       <div class="final-cta-left">
-        <div class="ic">✉️</div>
-        <div><h2>Get new worksheets as they come out.</h2><p>No spam, just an occasional email when something new is ready.</p></div>
+        <div><h2>Get new worksheets and blog posts as they come out.</h2><p>No spam, just an occasional email when something new is ready.</p></div>
       </div>
-      <form class="final-signup js-newsletter-form">
-        <input type="email" placeholder="Enter your email" required>
+      <form class="final-signup js-newsletter-form" id="newsletterForm">
+        <input type="email" placeholder="Enter your email" required id="newsletterEmail">
         <button type="submit" class="btn btn-coral">Subscribe
           <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
       </form>
+      <p class="newsletter-msg" id="newsletterMsg" style="display:none;"></p>
     </div>
   </div>
 </section>
@@ -1018,12 +1019,50 @@
     });
   });
 
-  // ---- Newsletter signup (placeholder, not wired to a real list yet) ----
+  // ---- Newsletter signup: submits to Google Apps Script / Google Sheet ----
+  // PASTE YOUR APPS SCRIPT WEB APP URL BELOW, replacing the placeholder text.
+  // You get this URL after deploying the newsletter-signup-apps-script.gs
+  // file as a Web App (see instructions inside that file).
+  const NEWSLETTER_ENDPOINT = 'https://script.google.com/macros/s/AKfycbyiMRXGm8Vt09Xa5po4XYiBUKXuz0c-PmZ_MFtkbCqNKjg8q8kWTjk44UbQUCKEckR05g/exec';
+
   document.querySelectorAll('.js-newsletter-form').forEach(f=>{
     f.addEventListener('submit', e=>{
       e.preventDefault();
+      const emailInput = document.getElementById('newsletterEmail');
+      const msgEl = document.getElementById('newsletterMsg');
+      const email = emailInput.value.trim();
+      const submitBtn = f.querySelector('button[type="submit"]');
+
+      if (!email) return;
+
       track('newsletter_signup_attempt', {});
-      alert('Newsletter signup placeholder, connect this to your email tool of choice (Substack, Buttondown, Mailchimp, etc).');
+
+      if (NEWSLETTER_ENDPOINT.indexOf('PASTE_YOUR') !== -1) {
+        // Endpoint not configured yet, safe fallback so the form doesn't silently fail
+        msgEl.textContent = "Signup isn't connected yet, check back soon.";
+        msgEl.style.display = 'block';
+        return;
+      }
+
+      submitBtn.disabled = true;
+      const formData = new FormData();
+      formData.append('email', email);
+
+      fetch(NEWSLETTER_ENDPOINT, {
+        method: 'POST',
+        mode: 'no-cors',
+        body: formData
+      }).then(()=>{
+        // no-cors requests always resolve here even on success, this is expected
+        msgEl.textContent = "You're on the list! Thanks for subscribing.";
+        msgEl.style.display = 'block';
+        f.reset();
+        submitBtn.disabled = false;
+      }).catch(()=>{
+        msgEl.textContent = "Something went wrong, please try again.";
+        msgEl.style.display = 'block';
+        submitBtn.disabled = false;
+      });
     });
   });
 
