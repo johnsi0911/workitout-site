@@ -40,6 +40,16 @@
   .blog-header h1{ font-size:38px; font-weight:800; letter-spacing:-.8px; margin-bottom:14px;}
   .blog-header p{ font-size:17px; color:var(--muted); max-width:520px; margin:0 auto;}
 
+  .filter-row{ display:flex; flex-wrap:wrap; justify-content:center; gap:10px; margin:32px 0 40px;}
+  .filter-pill{
+    font-family:inherit; font-size:14px; font-weight:600; color:var(--indigo);
+    background:var(--lav-card); border:1.5px solid transparent; border-radius:999px;
+    padding:9px 20px; cursor:pointer; transition:background .15s ease, color .15s ease;
+  }
+  .filter-pill:hover{ background:#E0DCF7;}
+  .filter-pill.active{ background:var(--indigo); color:#fff;}
+  .no-results{ text-align:center; color:var(--muted); font-size:15px; padding:40px 0;}
+
   .post-list{ padding-bottom:70px; display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
   .post-card{
     display:flex; flex-direction:column; border:1px solid var(--line); border-radius:18px; padding:26px 24px;
@@ -90,44 +100,56 @@
     <p>Short, practical reads on the psychology of work, decisions, difficult conversations, and the stuff that's hard to think through alone.</p>
   </div>
 
-  <div class="post-list">
-    <a href="/blog/as-a-manager-thinketh.html" class="post-card">
+  <div class="filter-row" id="filterRow">
+    <button type="button" class="filter-pill active" data-filter="all">All</button>
+    <button type="button" class="filter-pill" data-filter="Leadership">Leadership</button>
+    <button type="button" class="filter-pill" data-filter="Emotional Intelligence">Emotional Intelligence</button>
+    <button type="button" class="filter-pill" data-filter="Career Development">Career Development</button>
+    <button type="button" class="filter-pill" data-filter="Psychology">Psychology</button>
+  </div>
+
+  <div class="post-list" id="postList">
+    <a href="/blog/as-a-manager-thinketh.html" class="post-card" data-category="Leadership">
       <span class="cat">Leadership</span>
       <h2>As a Man(ager) Thinketh</h2>
       <p>The Pygmalion, Golem, and Galatea effects: how a manager's expectations, and your own self-belief, shape performance at work.</p>
       <span class="meta">Johnsi Jayasingh · September 20, 2026 · 5 min read</span>
     </a>
 
-    <a href="/blog/i-saw-the-angel-in-the-marble.html" class="post-card">
+    <a href="/blog/i-saw-the-angel-in-the-marble.html" class="post-card" data-category="Leadership">
       <span class="cat">Leadership</span>
       <h2>I Saw the Angel in the Marble</h2>
       <p>What Michelangelo's approach to sculpture reveals about mentoring and managing people: 8 practices for seeing and drawing out potential in others.</p>
       <span class="meta">Johnsi Jayasingh · September 13, 2026 · 4 min read</span>
     </a>
 
-    <a href="/blog/its-okay-to-feel-all-the-feels.html" class="post-card">
+    <a href="/blog/its-okay-to-feel-all-the-feels.html" class="post-card" data-category="Emotional Intelligence">
       <span class="cat">Emotional Intelligence</span>
       <h2>It's Okay to Feel All the Feels</h2>
       <p>Five common emotions that show up at work, anger, fear, envy, anxiety, and ennui, and simple ways to handle each one.</p>
       <span class="meta">Johnsi Jayasingh · September 6, 2026 · 5 min read</span>
     </a>
 
-    <a href="/blog/resilient-than-your-resume.html" class="post-card">
+    <a href="/blog/resilient-than-your-resume.html" class="post-card" data-category="Career Development">
       <span class="cat">Career Development</span>
       <h2>You Are More Resilient Than Your Resume Suggests</h2>
       <p>A simple resilience framework, I Am, I Can, I Have, and what it reveals about how careers actually survive the hard seasons.</p>
       <span class="meta">Johnsi Jayasingh · August 30, 2026 · 4 min read</span>
     </a>
 
-    <a href="/blog/before-you-react-give-your-brain-a-chance-to-catch-up.html" class="post-card">
+    <a href="/blog/before-you-react-give-your-brain-a-chance-to-catch-up.html" class="post-card" data-category="Psychology">
       <span class="cat">Psychology</span>
       <h2>Before You React, Give Your Brain a Chance to Catch Up</h2>
       <p>The neuroscience behind why we say things we regret at work under stress, what an amygdala hijack actually is, and four things you can do before you hit send.</p>
       <span class="meta">Johnsi Jayasingh · August 23, 2026 · 4 min read</span>
     </a>
 
-    <!-- Next post goes here, copy the <a class="post-card"> block above and update it. -->
+    <!-- Next post goes here, copy the <a class="post-card"> block above and update it.
+         Remember to also add data-category="YourCategory" to the <a> tag,
+         and if it's a brand-new category, add a matching filter pill above too. -->
   </div>
+
+  <p class="no-results" id="noResults" style="display:none;">No posts in this category yet.</p>
 </div>
 
 <footer>
@@ -135,6 +157,30 @@
     <p>© 2026 WorkITout. All rights reserved.</p>
   </div>
 </footer>
+
+<script>
+  const filterPills = document.querySelectorAll('.filter-pill');
+  const postCards = document.querySelectorAll('.post-card');
+  const noResults = document.getElementById('noResults');
+
+  filterPills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      filterPills.forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+
+      const filter = pill.getAttribute('data-filter');
+      let visibleCount = 0;
+
+      postCards.forEach(card => {
+        const matches = filter === 'all' || card.getAttribute('data-category') === filter;
+        card.style.display = matches ? '' : 'none';
+        if (matches) visibleCount++;
+      });
+
+      noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+    });
+  });
+</script>
 
 </body>
 </html>
